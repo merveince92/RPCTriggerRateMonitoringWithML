@@ -28,15 +28,20 @@ ii=0
 myList = []
 #print "{ "
 print "RunNumber","Timestamp","Board","RPC_RATE_1","RPC_RATE_2","RPC_RATE_3","RPC_RATE_4","ST_RATE_1","ST_RATE_2","ST_RATE_3","ST_RATE_4","ST_RATE_5"
+j = 0
 for rows in curs:
      path=rows[0]
      description=rows[1]
      contacts=rows[2]
      print rows[0],rows[1],rows[2],rows[3],rows[4],rows[5],rows[6],rows[7],rows[8],rows[9],rows[10],rows[11]
      myList.append([rows[0],rows[1],rows[2],rows[3],rows[4],rows[5],rows[6],rows[7],rows[8],rows[9],rows[10],rows[11]])
+     j = j + 1
+     if j > 1000:
+         break
 
 import csv
 with open('dt_rates.csv', 'wb') as myfile:
     wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
-    wr.writerow(myList)
+    for val in myList:
+        wr.writerow(val)
 
